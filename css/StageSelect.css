@@ -1,0 +1,63 @@
+﻿
+.SelectStagePanel
+{
+    
+   margin-top:40px;
+}
+
+.table > tbody > tr > td
+{
+    line-height:40px;
+}
+.StageTable
+{
+    font-size:20px;
+}
+.StageTable img
+{
+   height:40px;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    cursor:pointer;
+   background-color:#fc9a24;
+
+}
+.RowBtn
+{
+    opacity:0;
+    height: 40px;
+    left: 0px;
+    margin-top:-10px;
+    padding-bottom:60px;
+    margin-left: 15px;
+
+    position: absolute;
+}
+.cellDisapear
+{
+    width:1px;
+    height:1px;
+}
+
+
+.table-hover tbody tr:hover th
+{
+    cursor: default;
+    background-color: #f9f9f9;
+} 
+.CellTitle
+{
+    width:400px;
+}
+.CellUploader
+{
+    width:100px;
+}
+.fkborder
+{
+    border-radius:0;
+}
+.MariginTop
+{
+    margin-top:60px;
+}

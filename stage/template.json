@@ -1,0 +1,31 @@
+{
+  "StartPos": {
+    "X": 50,
+    "Y": 400,
+    "Direction": -1
+  },
+  
+  "enemy": [
+    {
+      "Character": 999,
+      "X": 1000,
+      "Y": 400,
+      "Type": "normal",
+	  "Direction": 1,
+	  "HP":200
+    }
+	
+  ],
+  "stage": {
+    "width": 7000,
+    "height": 2000
+  },
+  "obstacle": [
+    {
+      "X": 0,
+      "Y": 550,
+      "W": 1300,
+      "H": 100
+    }
+  ]
+}

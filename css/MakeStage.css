@@ -1,0 +1,57 @@
+﻿body {
+}
+.FKasplabel
+{
+   margin-bottom:5px;
+}
+.loginPanel
+{
+   margin-top:40px;
+}
+
+.SelectStagePanel
+{
+    
+   margin-top:40px;
+}
+
+.table > tbody > tr > td
+{
+    line-height:40px;
+}
+.StageTable
+{
+    font-size:20px;
+}
+.StageTable img
+{
+   height:40px;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+
+}
+
+.cellDisapear
+{
+    width:1px;
+    height:1px;
+}
+
+
+.table-hover tbody tr:hover th
+{
+    cursor: default;
+    background-color: #f9f9f9;
+}
+.CellTitle
+{
+    width:400px;
+}
+.fkborder
+{
+    border-radius:0;
+}
+.MariginTop
+{
+    margin-top:60px;
+}

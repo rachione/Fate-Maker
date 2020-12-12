@@ -1,0 +1,26 @@
+﻿body {
+}
+.FKasplabel
+{
+   margin-bottom:5px;
+}
+.loginPanel
+{
+   margin-top:40px;
+}
+.fkborder
+{
+    border-radius:0;
+}
+.fkmargin
+{
+     margin-top:15px;
+}
+.famargin
+{
+    margin-right:10px;
+}
+.signalert
+{
+    display:none;
+}

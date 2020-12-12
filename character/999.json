@@ -1,0 +1,167 @@
+{
+  "AI": {
+    "ChaseMaxRange": 0,
+    "ChaseMinRange": 0,
+    "AttackTick": 30
+  },
+  "CharacterData": {
+	"Gravity":true,
+	"Type":"Goal",
+	"HasBody":false,
+    "MaxBlood": 100,
+    "Blood": 100,
+    "RemoveAttackfreezed": 0,
+    "JumpFy": 0,
+    "AccelerateX": 0,
+    "MaxXspeed": 0,
+	"AttackFy":0,
+	"AttackFx":0,
+	"JumpAttackFy":0,
+	"JumpAttackFx":0
+  },
+  "bulletData": {
+	"HasBody":false,
+    "hasbullet": true,
+    "FirePicframe": [0],
+    "FireRepeatframe": 0,
+    "AccelerateX": 0,
+    "MaxXspeed": 0,
+	"AccelerateY": 0,
+    "MaxYspeed": 0,
+    "StartErrX": 0,
+    "StartErrY": 0,
+    "Damage": 50,
+	"PowerX":0,
+	"PowerY":20,
+	"IsExport":false
+  },
+  "Frame": [
+    {
+      "Base": "tool/teleport-",
+      "Size": 1,
+      "Width": 101,
+      "Height": 150,
+      "Body": {
+        "Left": 0,
+        "Top": 0,
+        "Width": 101,
+        "Height": 150
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 1
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": true
+    },
+    {
+      "Base": "tool/teleport-",
+      "Size": 1,
+      "Width": 101,
+      "Height": 150,
+      "Body": {
+        "Left": 0,
+        "Top": 0,
+        "Width": 101,
+        "Height": 150
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 4,
+          "RepeatFrames": 3
+        }
+      ],
+      "Restart": 1,
+      "IsRepeat": true
+     
+    },
+    {
+      "Base": "tool/teleport-",
+      "Size": 1,
+      "Width": 101,
+      "Height": 150,
+      "Body": {
+        "Left": 0,
+        "Top": 0,
+        "Width": 101,
+        "Height": 150
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 1
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": false
+    },
+    {
+       "Base": "tool/teleport-",
+      "Size": 1,
+       "Width": 101,
+      "Height": 150,
+      "Body": {
+        "Left": 0,
+        "Top": 0,
+        "Width": 101,
+        "Height": 150
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 1
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": true
+    },
+    {
+      "Base": "tool/teleport-",
+      "Size": 1,
+      "Width": 101,
+      "Height": 150,
+      "Body": {
+        "Left": 0,
+        "Top": 0,
+        "Width": 101,
+        "Height": 150
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 6
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": false
+    },
+    {
+      "Base": "tool/Empty-",
+      "Size": 1,
+       "Width": 101,
+      "Height": 150,
+      "Body": {
+        "Left": 0,
+        "Top": 0,
+        "Width": 101,
+        "Height": 150
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 1
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": false
+    }
+  ]
+}

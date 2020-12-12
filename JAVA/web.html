@@ -1,0 +1,296 @@
+
+<html>
+	<head>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js" ></script>
+	<script type="text/javascript" src="https://rawgit.com/padolsey-archive/jquery.fn/master/cross-domain-ajax/jquery.xdomainajax.js" ></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<style>
+		#loading {
+			display:none;
+			position:absolute; 
+			width:600px; 
+			height:600px; 
+			background: url('loader.gif') no-repeat center center;
+		}
+		#GameEnd {
+			display:none;
+			position:absolute; 
+			width:600px; 
+			height:600px; 
+			background-color: rgba(0,0,0,0.4);
+		}
+		#Title{
+			margin-top:250px;
+			text-align:center;
+			color:#fbbc05;
+			font-size: 50px;
+			font-weight: bold;
+			font-family:"Arial";
+		}
+		@font-face {		
+			font-family: 'glyphicon';
+			src: url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.eot'); 
+			src: url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+			url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2') format('woff2'), 
+			url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff') format('woff'), 
+			url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.ttf')  format('truetype'),
+			url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.svg#svgFontName') format('svg'); 
+		}
+	</style>
+	</head>
+	<body>
+	<div id="GameEnd" >
+		<div class="row" >
+			<div class="col-md-4 col-md-offset-4" >
+				<div id="Title">dsadad</div>
+			</div>
+		</div>
+		<div class="row" >
+			<div class="col-md-4 col-md-offset-4" >
+				<button id="Restart" type="button" class="btn btn-danger btn-lg btn-block">Restart</button>
+			</div>
+		</div>
+	</div>
+	<div id="loading"></div>
+	<canvas id="FCanvasK" width="600" height="600"></canvas>
+	</body>
+	<script>
+	var Cube=function(pos,ctx){
+		var dictionary={};
+		dictionary.index=pos;
+		dictionary.margin=10;
+		dictionary.X=pos%3;
+		dictionary.Y=Math.floor(pos/3);
+		dictionary.CubeSize=200;
+		dictionary.CubeX=dictionary.margin+dictionary.X*dictionary.CubeSize;
+		dictionary.CubeY=dictionary.margin+dictionary.Y*dictionary.CubeSize;
+		dictionary.CubeAdjustSize=dictionary.CubeSize-dictionary.margin*2;
+		
+		dictionary.type='0';
+		dictionary.body={};
+		
+		var errY=35; 
+		
+		
+		
+		dictionary.Setbody=function(){
+			this.body.Left=this.CubeX;
+			this.body.Top=this.CubeY;
+			this.body.Right=this.CubeX+this.CubeAdjustSize;
+			this.body.Bottom=this.CubeY+this.CubeAdjustSize;
+		}
+		dictionary.IsInside=function(Pos){
+			return Pos.x>=this.body.Left&&Pos.x<=this.body.Right&&
+			Pos.y>=this.body.Top&&Pos.y<=this.body.Bottom
+		}
+		dictionary.draw=function(){
+			ctx.fillStyle = "#00a7e4";
+			ctx.fillRect(this.CubeX,this.CubeY,this.CubeAdjustSize,this.CubeAdjustSize);
+			
+			
+			ctx.font = "120px Arial";	
+			ctx.fillStyle = "#FFF";
+			if(this.type=='0'){			
+				ctx.fillText("",this.CubeX+this.CubeAdjustSize/2,this.CubeY+this.CubeAdjustSize/2+errY);
+			}
+			else if(this.type=='1'){
+				ctx.fillText("O",this.CubeX+this.CubeAdjustSize/2,this.CubeY+this.CubeAdjustSize/2+errY);
+			}
+			else if(this.type=='2'){
+				ctx.fillText("X",this.CubeX+this.CubeAdjustSize/2,this.CubeY+this.CubeAdjustSize/2+errY);
+			}
+			else if(this.type=='3'){
+				ctx.font = '120px glyphicon';
+				ctx.fillText(String.fromCharCode(0xe126),this.CubeX+this.CubeAdjustSize/2,this.CubeY+this.CubeAdjustSize/2+errY);
+			}
+			
+			
+		}
+		return dictionary;
+	}
+	
+	var W=600;
+	var H=600;
+	
+	var Cubes=[];
+	var canvas=document.getElementById("FCanvasK")
+	var ctx = canvas.getContext("2d");
+	ctx.textAlign = 'center';
+	
+	var GameTick;
+
+	
+	for(var i=0;i<9;i++){
+		var cube= Cube(i,ctx);			
+		Cubes.push(cube);
+	}
+	
+	
+	var Stop=false;
+	var getData=function(processing){
+	
+		$.ajax({
+			url: 'http://140.138.146.85/gametable/db.php?cmd=get&tag=s1022003',
+			type: 'GET',
+			success: function(res) {
+				var responseText =	res.responseText;
+				if(responseText!=""){
+					
+					var GameStr = responseText.split('<body>')[1].split('</body>')[0];
+					if(GameStr=='000000000')GameEndHide();
+					var GameChar = GameStr.split('');
+					
+					ctx.clearRect(0,0,W,H);
+					for(var i=0;i<GameChar.length;i++){
+						Cubes[i].type=GameChar[i];
+						Cubes[i].draw();
+					}
+				}
+				if(processing){
+					loadingOff();
+				}
+			}
+		});
+	}
+	var setData=function(string){
+		
+		$.ajax({
+			url: 'http://140.138.146.85/gametable/db.php?cmd=set&tag=s1022003&content='+string,
+			type: 'GET',
+			success: function() {
+				getData(true);
+			}
+		});
+	}
+	var GetNextType=function(){
+		var num=0;
+		for(var i=0;i<Cubes.length;i++){
+			num += parseInt(Cubes[i].type);
+		}
+		if(num==0||num%3==0){
+			return "1"
+		}
+		else{
+			return "2"
+		}
+	}
+	
+	var addMouseEvent=function(){
+		
+		 canvas.addEventListener("click", function (e) {
+		
+			var Pos = { x: e.offsetX, y: e.offsetY };
+				var str="";
+				for(var i=0;i<Cubes.length;i++){
+					Cubes[i].Setbody();
+					if(Cubes[i].IsInside(Pos)&&Cubes[i].type=='0'){
+						loadingOn();
+						Cubes[i].type=GetNextType();
+						
+					}
+					str+=Cubes[i].type;
+				}
+				DetectWin();
+				setData(str);
+			
+		 });
+	}
+	
+	
+	var DetectWin=function(){
+		
+		var win=0;
+		//直橫
+		for(var col=1,row=3;col<=3;col+=2,row-=2){
+			for(var j=0;j<3;j++){
+				var sum=0;
+				for(var i=0;i<3;i++){
+					var num=parseInt(Cubes[i*col+j*row].type);
+					if(num==0)sum =9999999;
+					sum += num;
+				}
+				if(sum==3){
+					win=1;
+				}
+				else if(sum==6){
+					win=2;
+				}
+			}
+		}
+		//斜
+		for(var j=2;j<=4;j+=2){
+				var sum=0;
+				for(var i=-1;i<=1;i++){
+					var num=parseInt(Cubes[i*j+4].type);
+					if(num==0)sum =9999999;
+					sum += num;
+				}
+				if(sum==3){
+					win=1;
+				}
+				else if(sum==6){
+					win=2;
+				}
+		}
+		
+		var AllSum=0;
+		for(var i=0;i<Cubes.length;i++){
+			AllSum += parseInt(Cubes[i].type);
+		}
+		
+		if(win==1){
+			$("#Title").html('O win!');
+			GameEnd();
+		}
+		else if(win==2){
+			$("#Title").html('X win!');
+			GameEnd();
+		}
+		else if(AllSum==13){
+			$("#Title").html('Draw!');
+			GameEnd();
+		}
+		
+	}
+	
+	
+	
+	var StartGame=function(){
+		GameTick = setInterval(
+		
+			function(){
+				getData(false);
+				DetectWin();
+			}
+			
+		,500);		
+	}
+	var GameEnd=function(){
+		GameEndShow();	
+	}
+	
+	var loadingOn=function(){
+		$("#loading").show();
+	}
+	var loadingOff=function(){
+		$("#loading").hide();
+	}
+	var GameEndShow=function(){
+		$("#GameEnd").show();
+	}
+	var GameEndHide=function(){
+		$("#GameEnd").hide();
+	}
+	var SetRestartClick=function(){
+		$("#Restart").click(function(){
+			GameEndHide();
+			loadingOn();
+			setData('000000000');
+		});
+	}
+	
+	addMouseEvent();
+	SetRestartClick();
+	StartGame();
+	</script>
+</html>

@@ -1,0 +1,224 @@
+{
+  "AI": {
+    "ChaseMaxRange": 300,
+    "ChaseMinRange": 100,
+    "AttackTick": 50
+  },
+  "CharacterData": {
+  "Gravity":true,
+  "Type":"Character",
+  "HasBody":true,
+    "MaxBlood": 1150,
+    "Blood": 1150,
+    "RemoveAttackfreezed": 3,
+    "JumpFy": -70,
+    "AccelerateX": 1,
+    "MaxXspeed": 15,
+	"AttackFy":-55,
+	"AttackFx":10,
+	"JumpAttackFy":-5,
+	"JumpAttackFx":10
+  },
+  "bulletData": {
+	"HasBody":false,
+    "hasbullet": true,
+    "FirePicframe": [1,2,3,4],
+    "FireRepeatframe": 3,
+    "AccelerateX": 4,
+    "MaxXspeed": 12,
+	"AccelerateY": 4,
+    "MaxYspeed": 10,
+    "StartErrX": 0,
+    "StartErrY": 0,
+    "Damage": 60,
+	"PowerX":12,
+	"PowerY":35,
+	"IsExport":false
+
+  },
+  "Frame": [
+    {
+      "Base": "Rider/STAND-",
+      "Size": 1,
+      "Width": 207,
+      "Height": 115,
+      "Body": {
+        "Left":73,
+        "Top": 45,
+        "Width": 60,
+        "Height": 60
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 3
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": true
+    },
+    {
+      "Base": "Rider/RUN-",
+      "Size": 6,
+     "Width": 207,
+      "Height": 115,
+      "Body": {
+        "Left":73,
+        "Top": 45,
+        "Width": 60,
+        "Height": 60
+      },
+      "Data": [
+          {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 6
+        },
+		 {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 6
+        },
+		 {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 6
+        },
+		 {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 6
+        },
+		 {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 6
+        },
+		 {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 6
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": true
+    
+    },
+    {
+      "Base": "Rider/ATTACK-",
+      "Size": 6,
+        "Width": 269,
+      "Height": 246,
+      "Body": {
+        "Left": 73,
+        "Top": 45,
+        "Width": 60,
+        "Height": 60
+      },
+      "Data": [
+        {
+			"errX":-30,
+          "X": 0,
+          "Y": -60,
+          "RepeatFrames": 4
+        },
+		 {
+		 "errX":-30,
+          "X": 0,
+          "Y": -60,
+          "RepeatFrames": 4
+        },
+		{
+		"errX":-30,
+          "X": 0,
+          "Y": -60,
+          "RepeatFrames": 8
+        },
+		 {
+		 "errX":-30,
+          "X": 0,
+          "Y": -60,
+          "RepeatFrames": 4
+        },
+		{
+		"errX":-30,
+          "X": 0,
+          "Y": -60,
+          "RepeatFrames": 8
+        },
+		 {
+		 "errX":-30,
+          "X": 0,
+          "Y": -60,
+          "RepeatFrames": 4
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": false
+    },
+    {
+      "Base": "Rider/JUMP-",
+      "Size": 1,
+      "Width": 207,
+      "Height": 115,
+      "Body": {
+        "Left":73,
+        "Top": 45,
+        "Width": 60,
+        "Height": 60
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 6
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": true
+    },
+    {
+      "Base": "Rider/DAMAGE-",
+      "Size": 1,
+      "Width": 207,
+      "Height": 115,
+      "Body": {
+        "Left":73,
+        "Top": 45,
+        "Width": 60,
+        "Height": 60
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 10
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": false
+    },
+    {
+      "Base": "tool/Empty-",
+      "Size": 1,
+      "Width": 70,
+      "Height": 70,
+      "Body": {
+        "Left": 0,
+        "Top": 0,
+        "Width": 70,
+        "Height": 70
+      },
+      "Data": [
+        {
+          "X": 0,
+          "Y": 0,
+          "RepeatFrames": 7
+        }
+      ],
+      "Restart": 0,
+      "IsRepeat": false
+    }
+  ]
+}
